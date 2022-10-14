@@ -39,7 +39,7 @@ def main():
         if library_name == 'pandas':
             url = f'https://pandas.pydata.org/docs/reference/api/pandas.{function}.html'
         elif library_name == 'numpy':
-            url = f'https://numpy.org/doc/stable/reference/generated/numpy.{".".join(submodules)}.html'
+            url = f'https://numpy.org/doc/stable/reference/generated/numpy.{".".join(submodules) + function}.html'
         else:
             return
 
