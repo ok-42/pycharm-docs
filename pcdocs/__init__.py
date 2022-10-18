@@ -1,5 +1,16 @@
+import logging
 import sys
 import webbrowser
+
+
+def make_logger():
+    logger = logging.getLogger('log')
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter(fmt='%(message)s')
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    return logger
 
 
 def main():
@@ -15,8 +26,10 @@ def main():
     - module: https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html
     """
 
+    log = make_logger()
+
     text: str = sys.argv[1]
-    print(text)
+    log.info(f'{text=}')
 
     libraries: dict[str, str] = {
         'np': 'numpy',
@@ -47,7 +60,12 @@ def main():
     # TODO add built-in libraries
     else:
         library_name = 'built-in'
+        submodules = ['']
         function = text
         url = f'https://docs.python.org/3/library/functions.html#{function}'
+
+    log.debug(f'{library_name=}')
+    log.debug(f'{submodules=}')
+    log.debug(f'{function=}')
 
     webbrowser.open(url)
